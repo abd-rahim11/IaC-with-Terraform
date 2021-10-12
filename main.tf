@@ -76,3 +76,29 @@ resource "aws_default_security_group" "default-sg" {
       "Name" = "${var.env_prefix}-default-sg"
     }
 }
+
+
+
+
+data "aws_ami" "latest-amazon-linux-image" {
+    most_recent = true
+    owners = ["amazon"]
+    filter {
+        name = "name"
+        values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+    }
+    filter {
+        name = "virtualization-type"
+        values = ["hvm"]
+    }
+}
+/*
+resource "aws_instance" "myapp-server" {
+    ami = data.aws_ami.latest-amazon-linux-image.id
+
+}
+*/
+
+output "aws_ami_id" {
+  value = data.aws_ami.latest-amazon-linux-image.id
+}
