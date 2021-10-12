@@ -1,0 +1,13 @@
+#local .terraform dirs 
+**/.terraform/*
+
+#tf state file 
+*.tfstate
+*.tfstate.*
+
+#tf variable files, may contain sensitive data 
+*.tfvars
+
+#ignore CLI config file
+.terraformrc
+terraform.rc
