@@ -9,6 +9,7 @@ variable "subnet_cidr_block" {}
 variable "avail_zone" {}
 variable "env_prefix" {}
 variable "my_ip" {}
+variable "instance_type" {}
 
 
 resource "aws_vpc" "myapp-vpc" {
@@ -92,12 +93,23 @@ data "aws_ami" "latest-amazon-linux-image" {
         values = ["hvm"]
     }
 }
-/*
+
 resource "aws_instance" "myapp-server" {
     ami = data.aws_ami.latest-amazon-linux-image.id
+    instance_type = var.instance_type
+    subnet_id = aws_subnet.myapp-subnet-1.id
+    vpc_security_group_ids = [aws_default_security_group.default-sg.id]
+    availability_zone = var.avail_zone
+    associate_public_ip_address = true
+    key_name = "server-key-pair"
+    tags = {
+        "Name" = "${var.env_prefix}-server"
+    }
+
 
 }
-*/
+
+
 
 output "aws_ami_id" {
   value = data.aws_ami.latest-amazon-linux-image.id
