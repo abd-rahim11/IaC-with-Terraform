@@ -87,7 +87,7 @@ resource "aws_instance" "myapp-server" {
     tags = {
         "Name" = "${var.env_prefix}-server"
     }
-
+    /*
     connection {
       type = "ssh"
       host = self.public_ip
@@ -108,7 +108,7 @@ resource "aws_instance" "myapp-server" {
         command = "echo ${self.public_ip} > output.txt"
       
     }
-
+    */
 
 }
 
