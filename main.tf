@@ -130,6 +130,10 @@ resource "aws_instance" "myapp-server" {
     }
     #user_data = file("entry-script.sh")
 
+    provisioner "local-exec" {
+        command = "echo ${self.public_ip} > output.txt"
+      
+    }
 
 
 }
